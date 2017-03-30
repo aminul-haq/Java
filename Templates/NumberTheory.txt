@@ -1,0 +1,37 @@
+static class NumberTheory {
+        public static TreeMap<Integer, Integer> getPrimeFactorsFast(int x, int[] primeDiv) {
+            TreeMap<Integer, Integer> res = new TreeMap<Integer, Integer>();
+            while (x > 1) {
+                int prime = primeDiv[x];
+                int mul = 0;
+                while (x % prime == 0) {
+                    mul++;
+                    x /= prime;
+                }
+                res.put(prime, mul);
+            }
+            return res;
+        }
+
+        public static int[] getPrimeDiv(int maxValue) {
+            int[] primeDiv = new int[maxValue + 1];
+            Arrays.fill(primeDiv, -1);
+            for (int i = 2; i <= maxValue; i++)
+                if (primeDiv[i] < 0)
+                    for (int j = i; j <= maxValue; j += i) primeDiv[j] = i;
+            return primeDiv;
+        }
+
+        public static long inverse(long x, long mod) {
+            long res = 1;
+            long mul = x;
+            long k = mod - 2;
+            while (k > 0) {
+                if (k % 2 == 1) res = res * mul % mod;
+                mul = mul * mul % mod;
+                k >>= 1;
+            }
+            return res;
+        }
+
+    }

@@ -1,0 +1,112 @@
+import java.util.*;
+
+class P implements Comparable<P> {
+	double x, y;
+
+	P() {
+	}
+
+	P(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	P add(P p) {
+		return new P(x + p.x, y + p.y);
+	}
+
+	P sub(P p) {
+		return new P(x - p.x, y - p.y);
+	}
+
+	P mult(double f) {
+		return new P(x * f, y * f);
+	}
+
+	P div(double f) {
+		return new P(x / f, y / f);
+	}
+
+	double det(P p) {
+		return x * p.y - y * p.x;
+	}
+
+	double dot(P p) {
+		return x * p.x + y * p.y;
+	}
+
+	@Override
+	public int compareTo(P o) {
+		// TODO Auto-generated method stub
+		int c = G.sign(x - o.x);
+		if (c != 0)
+			return c;
+		return G.sign(y - o.y);
+	}
+
+	@Override
+	public String toString() {
+		return "(" + x + "," + y + ")";
+	}
+}
+
+class G {
+	static final double EPS = 1e-8;
+
+	static int sign(double s) {
+		return s < -EPS ? -1 : s > EPS ? 1 : 0;
+	}
+
+	static double cross(P p1, P p2, P p3) {
+		return p2.sub(p1).det(p3.sub(p1));
+	}
+
+	static int crossOp(P p1, P p2, P p3) {
+		return sign(cross(p1, p2, p3));
+	}
+
+	static P isSS(P p1, P p2, P q1, P q2) {
+		double a1 = cross(q1, q2, p1), a2 = -cross(q1, q2, p2);
+		if (Math.abs(a1 + a2) <= EPS)
+			return null;
+		return p1.mult(a2).add(p2.mult(a1)).div(a1 + a2);
+	}
+
+	static double area(P[] ps) {
+		double ret = 0;
+		for (int i = 0; i < ps.length; i++)
+			ret += ps[i].det(ps[(i + 1) % ps.length]);
+		return Math.abs(ret / 2);
+	}
+
+	static P[] convexCut(P[] ps, P q1, P q2) {
+		List<P> qs = new ArrayList<P>();
+		for (int i = 0; i < ps.length; i++) {
+			P p1 = ps[i], p2 = ps[(i + 1) % ps.length];
+			int d1 = crossOp(q1, q2, p1), d2 = crossOp(q1, q2, p2);
+			if (d1 >= 0)
+				qs.add(p1);
+			if (d1 * d2 < 0)
+				qs.add(isSS(p1, p2, q1, q2));
+		}
+		return qs.toArray(new P[0]);
+	}
+
+	static P[] convexHull(P[] ps) {
+		if (ps.length <= 1)
+			return ps;
+		Arrays.sort(ps);
+		int n = ps.length;
+		P[] qs = new P[n * 2];
+		int k = 0;
+		for (int i = 0; i < n; qs[k++] = ps[i++])
+			while (k > 1 && crossOp(qs[k - 2], qs[k - 1], ps[i]) <= 0)
+				--k;
+		for (int i = n - 2, t = k; i >= 0; qs[k++] = ps[i--])
+			while (k > t && crossOp(qs[k - 2], qs[k - 1], ps[i]) <= 0)
+				--k;
+		P[] res = new P[k - 1];
+		System.arraycopy(qs, 0, res, 0, k - 1);
+		return res;
+	}
+}

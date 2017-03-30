@@ -1,0 +1,23 @@
+  static int lower_bound(ArrayList<Integer> list, int x){
+    return (~Collections.binarySearch(list, x, lbc));
+  }
+  
+  static int upper_bound(ArrayList<Integer> list, int x){
+    return (~Collections.binarySearch(list, x, ubc));
+  }
+
+  static Comparator<Integer> lbc = new LowerBoundComparator<Integer>();
+  static Comparator<Integer> ubc = new UpperBoundComparator<Integer>();
+  
+  static class LowerBoundComparator<T extends Comparable<? super T>> implements Comparator<T> {
+    public int compare(T x, T y) {
+      return (x.compareTo(y) >= 0) ? 1 : -1;
+    }
+  }
+  
+  static class UpperBoundComparator<T extends Comparable<? super T>> implements Comparator<T>{
+    public int compare(T x, T y) {
+      return (x.compareTo(y) > 0) ? 1 : -1;
+    }
+  }
+  

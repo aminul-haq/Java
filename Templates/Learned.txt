@@ -1,0 +1,342 @@
+1. removes spaces inside from a String>>  String output = YourString.replaceAll("\\s","");
+
+2. searching a String array >> Arrays.asList(yourArray).contains(yourValue);
+
+3. linkedList to Array String[] array = linkedlist.toArray(new String[linkedlist.size()]);
+
+4. Integer.parseInt("number in other base", other base) //convert to deciaml
+
+5. String reverse = new StringBuilder(sq).reverse().toString();
+ 
+6. String BaseConvert= Integer.toString(decimal_Number, other base);
+
+7. int retVal = Arrays.binarySearch(intArr,searchVal);
+
+8.  #include <bits/stdc++.h>
+
+9. binarySearch http://www.cs.toronto.edu/~reid/search/bincode.html
+
+10. st.hasMoreTokens()
+
+11. Long[] array = out1.toArray(new Long[out1.size()]);
+
+12. while(scanf("%d",&N)==1)
+
+13.  a<<1  = 2*a;  1<<x = 2^x;  m << y = m * (2^y);
+
+14.  a >> 1 = a/2;  a >> b = a / (2^b)
+
+15. 
+int bSearch(int num){
+	int lo  = 0, hi = length , mid = (lo+hi)/2;
+	long temp = 0;
+	while(lo < hi){
+		mid = (lo+hi)/2;
+		temp = arr[mid];
+		if( temp >= num) hi = mid;
+		else lo = mid+1;
+	}
+
+	return lo; //returns the lowest index where arr[lo] = num;
+}
+
+16.
+//hashing  values(indexes) of objects
+    sort(pr, pr+n, cmp);
+
+    int cnt = 1, prev = pr[0].num;
+    pr[0].hash = cnt;
+    temp[cnt] = prev;
+    for(int i = 1; i < n; i++){
+      if(prev != pr[i].num){
+        prev = pr[i].num;
+        cnt++;
+        pr[i].hash = cnt;
+        temp[cnt] = prev;
+      }
+      else
+        pr[i].hash = cnt;
+     }
+
+   for(int i = 0; i < n; i++){
+      p[pr[i].idx] = pr[i];
+    }
+
+17.
+  static boolean isPrime(int p){
+    if( p == 2) return true;
+    if ( p % 2 == 0 || p < 2 ) return false;
+    
+    int len = (int) Math.sqrt (p * 1.0);
+    
+    for ( int i = 3; i <= len; i += 2 ) if ( p % i == 0 ) return false;
+    return true;
+  }
+  
+18.
+        void dump(int[]a){for(int i=0;i<a.length;i++)System.out.print(a[i]+" ");System.out.println();}
+	void dump(int[]a,int n){for(int i=0;i<a.length;i++)System.out.printf("%"+n+"d",a[i]);System.out.println();}
+	void dump(long[]a){for(int i=0;i<a.length;i++)System.out.print(a[i]+" ");System.out.println();}
+	void dump(char[]a){for(int i=0;i<a.length;i++)System.out.print(a[i]);System.out.println();}
+	long pow(long a,int n){long r=1;while(n>0){if((n&1)==1)r*=a;a*=a;n>>=1;}return r;}
+	String itob(int a,int l){return String.format("%"+l+"s",Integer.toBinaryString(a)).replace(' ','0');}
+	void sort(int[]a){m_sort(a,0,a.length,new int[a.length]);}
+	void m_sort(int[]a, int s, int sz, int[]b){
+		if(sz<7){for(int i=s;i<s+sz;i++)for(int j=i;j>s&&a[j-1]>a[j];j--)swap(a, j, j-1);return;}
+		m_sort(a,s,sz/2,b);m_sort(a,s+sz/2,sz-sz/2,b);int idx=s;int l=s,r=s+sz/2;final int le=s+sz/2,re=s+sz;
+		while(l<le&&r<re){if(a[l]>a[r])b[idx++]=a[r++];else b[idx++]=a[l++];}
+		while(r<re)b[idx++]=a[r++];while(l<le)b[idx++]=a[l++];for(int i=s;i<s+sz;i++)a[i]=b[i];
+	} /* qsort(3.5s)<<msort(9.5s)<<<shuffle+qsort(17s)<Arrays.sort(Integer)(20s) */
+	void swap(int[] a,int i,int j){final int t=a[i];a[i]=a[j];a[j]=t;}
+	int binarySearchSmallerMax(int[]a,int v) // get maximum index which a[idx]<=v
+	{int l=0,r=a.length-1,s=0;while(l<=r){int m=(l+r)/2;if(a[m]>v)r=m-1;else{l=m+1;s=m;}}return a[s]>v?-1:s;}
+
+
+19. binary search for BIT
+
+int bSearch(int val ){
+    int idx = 0 , d = length-1, tidx;
+    val --;
+    while (d >0 &&  idx <= length-1){
+        tidx = idx + d;
+        if(tidx <= length-1 &&  bit[tidx] <= val) {
+            idx = tidx;
+            val -= bit[tidx];
+        }
+        d >>= 1;
+    }
+    return idx + 1;
+}
+
+
+
+20.
+  static int bSearch(long num, int [] arr){
+    int lo  = 0, hi = arr.length-1, mid = (lo+hi)/2;
+    int temp = 0;
+    while(lo < hi){
+      mid = (lo+hi)/2;
+      temp = arr[mid];
+      if( temp >= num) hi = mid;
+      else lo = mid+1;
+    }
+    return lo; //returns the lowest index where arr[lo] >= num;
+  }
+
+21. Priority Queue max to min order:
+
+PriorityQueue<Integer> pq = new PriorityQueue<Integer> (new Comparator<Integer> () {
+      public int compare(Integer a, Integer b) {
+        return b - a;
+      }
+    }
+    ); 
+
+ //or,
+
+PriorityQueue<Integer> pq1= new PriorityQueue<Integer>(10, new Comparator<Integer>() {
+public int compare(Integer x, Integer y) {
+if (x < y) return 1;
+if (x > y) return -1;
+return 0;
+}
+});
+
+22.
+private static boolean nextPermutation(int[] a) {
+		return nextPermutation(a, 0, a.length);
+	}
+	
+	private static boolean nextPermutation(int[] a, int x, int y) {
+		for (int i = y - 2; i >= x; --i) {
+			if (a[i] < a[i + 1]) {
+				// replace a[i] with the next largest element in a[i + 1], ..., a[y - 1]
+				int next = y - 1;
+				while (a[next] <= a[i])
+					--next;
+				int temp = a[next];
+				a[next] = a[i];
+				a[i] = temp;
+				// reverse a[i + 1], ..., a[y - 1]
+				for (int j = 0; j < (y - (i + 1))/2; ++j) {
+					int s = i + 1 + j;
+					int t = y - 1 - j;
+					temp = a[s];
+					a[s] = a[t];
+					a[t] = temp;
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+
+23.
+  static long bigmod ( long a, long p, long m ) { // returns (a^p) % m
+    long res = 1 % m, x = a % m;
+    while ( p > 0 ) {
+      if ( (p & 1) > 0 ) res = ( res * x ) % m;
+      x = ( x * x ) % m; p >>= 1;
+    }
+    return res;
+  }
+
+24.
+  static int gcd(int p, int q) {
+    if (q == 0) return p;
+    else return gcd(q, p % q);
+  }
+
+25.
+int mod(int x,int y){
+    if(x<0)
+        x=x+(-x/y+1)*y;
+    return x%y;
+}
+
+26. //union_find
+  static int find(int i) {
+    int p = parent[i];
+    if (i == p) return i;
+    return parent[i] = find(p);
+  }
+
+27.
+    
+    @Override
+    public int hashCode() {
+      return Long.valueOf((a * 31 + b)).hashCode();
+    }
+    @Override
+    public boolean equals( Object p){
+      if(this == p) return true;
+      if(p == null ) return false;
+      if (getClass() != p.getClass())
+        return false;
+      Pair pp = (Pair) p;
+      return a == pp.a && b == pp.b;
+    }
+    
+28. 
+  static void shuffleArray(long[] array) {
+     Random random = new Random();
+     for (int i = array.length - 1; i > 0; i--) {
+       int index = random.nextInt(i + 1);
+       long temp = array[index];
+       array[index] = array[i];
+       array[i] = temp;
+     }
+   }
+
+29.
+static void radixSort(int[] xs) {
+		int[] cnt = new int[(1<<16)+1];
+		int[] ys = new int[xs.length];
+		
+		for(int j = 0; j <= 16; j += 16) {
+			Arrays.fill(cnt, 0);
+			for(int x : xs) { cnt[(x>>j&0xFFFF)+1]++; }
+			for(int i = 1; i < cnt.length; i++) { cnt[i] += cnt[i-1]; }
+			for(int x : xs) { ys[cnt[x>>j&0xFFFF]++] = x; }
+			{ final int[] t = xs; xs = ys; ys = t; }
+		}
+		
+		if(xs[0] < 0 || xs[xs.length - 1] >= 0) {
+			return;
+		}
+		
+		{
+			int i, j, c;
+			for(i = xs.length - 1, c = 0; xs[i] < 0; i--, c++) { ys[c] = xs[i]; }
+			for(j = xs.length - 1; i >= 0; i--, j--) { xs[j] = xs[i]; }
+			for(i = c - 1; i >= 0; i--) { xs[i] = ys[c-1-i]; }
+		}
+	}
+
+30.
+
+  static void sieve(int n, boolean [] isPrime){
+     //boolean[] isPrime = new boolean[n+1];
+     Arrays.fill(isPrime, true); 
+     isPrime[0] = isPrime[1] = false;
+     for (int factor = 2; factor*factor <= n; factor++) {
+       if (isPrime[factor]) {
+         for (int j = factor; factor*j <= n; j++) {
+           isPrime[factor*j] = false;
+         }
+       }
+     }
+  }
+
+31. 
+  static double TernarySearch(double l, double r){ //use long/int/double where necessary
+    double m1 , m2;
+    while ( r - l > 1e-8 ){
+      m1 = (2 * l + r) / 3.0;
+      m2 = (l + 2 * r) / 3.0;
+      if ( cal(m1) > cal(m2) ) l = m1;
+      else r = m2;
+    }
+    return r;
+  }
+
+32. for bit:
+ int getAsSetOf(int w) {
+	w++;
+        if (w <= 0) return -1;
+        int x = 0;
+        int k = 1;
+        while (k * 2 <= N) k *= 2;
+        for (; k > 0; k /= 2) {
+          if (x + k <= N && data[x + k - 1] < w) {
+            w -= data[x + k - 1];
+            x += k;
+          }
+        }
+        return x;
+      }
+
+33. binary search for BIT:
+  static int BS(int val ){ //size should be a power of 2: 1, 2, 4, 8, 256, 1024 etc.... //
+    int idx = 0 , d = size , tidx;
+    val --;
+    while (d > 0 &&  idx <= size ) {
+        tidx = idx + d;
+        if(tidx <= size &&  bit[tidx] <= val) {
+            idx = tidx;
+            val -= bit[tidx];
+        }
+        d >>= 1;
+    }
+    return idx + 1;
+  }
+
+34. all primes list upto N;
+
+ static void sieve(int n, boolean [] isPrime){
+    isPrime = new boolean[n+1];
+    primes = new ArrayList<Integer>();
+    Arrays.fill(isPrime, true); 
+    isPrime[0] = isPrime[1] = false;
+    for (int factor = 2; factor*factor <= n; factor++) {
+      if (isPrime[factor]) {
+        for (int j = factor; factor*j <= n; j++) {
+          isPrime[factor*j] = false;
+        }
+      }
+    }
+    for(int i = 2; i < n; i++){
+      if(isPrime[i]) primes.add(i);
+    }
+  }
+
+35.
+static double getAngle(Point p, Point target) {
+    double angle = (double) Math.toDegrees(Math.atan2(target.y - p.y, target.x - p.x));
+    
+    if(angle < 0){
+      angle += 360;
+    }
+    
+    return angle;
+  }
