@@ -1,0 +1,26 @@
+static class MultiSet <T> extends HashMap/*Change to TreeMap if you want */<T,Integer>
+    {
+	public void add(T key)
+	{
+	    Integer q = super.get(key);
+	    if(q == null)
+		super.put(key, 1);
+	    else
+		super.put(key, q+1);
+	}
+	@Override
+	public Integer remove(Object key) {
+	    Integer q = super.get(key);
+	    if(q != null)
+	    {
+		if(q == 1)
+		    super.remove(key);
+		else
+		    super.put((T)key, q-1);
+	    }
+	    else
+		throw new NullPointerException("The specified key does not exist");
+
+	    return q;
+	}
+    }

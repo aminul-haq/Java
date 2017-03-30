@@ -1,0 +1,23 @@
+class Multiset<K> extends TreeMap<K, Integer>{
+ 
+    void insert(K arg){
+        Integer got = get(arg);
+        if (got!=null){
+            put(arg, got+1);
+        } else {
+            put(arg, 1);
+        }
+    }
+   
+    void erase(K arg){
+        Integer got = get(arg);
+        if (got!=null){
+            if (got==1){
+                remove(arg);
+            } else {
+                put(arg, got-1);
+            }
+        }
+    }
+   
+}
